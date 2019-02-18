@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import { getUrlVars } from '@/utils/index'
 export default {
   name: 'Auth',
   data() {
@@ -34,6 +35,8 @@ export default {
     // when code in url
     if (this.code) this.getAccessToken()
     else {
+      this.getCodeURL += '?' + 'client_id=' + this.client_id + '&response_type=code&redirect_uri=' + window.location.href
+      window.location.href = this.getCodeURL
       // if no code in top, get accessToken from cookie
       this.accessToken = this.$cookie.get('accessToken')
       if (this.accessToken) this.getUser()
@@ -49,11 +52,8 @@ export default {
       }
     },
     getCode: function() {
-      this.getCodeURL += '?' + 'client_id=' + this.client_id + '&response_type=code&redirect_uri=' + window.location.href
-      window.location.href = this.getCodeURL
-      console.log('=======' + location.search)
       if (location.search) {
-        const parse = JSON.parse(location.search)
+        const parse = getUrlVars(location.search)
         if (parse.state === this.state) {
           this.code = parse.code
         }
