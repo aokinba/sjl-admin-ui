@@ -28,6 +28,11 @@
           Sign in
         </el-button>
       </el-form-item>
+      <el-form-item>
+        <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
+          授权登录
+        </el-button>
+      </el-form-item>
       <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
         <span> password: admin</span>
