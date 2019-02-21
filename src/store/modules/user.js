@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/login'
+import { login, logout, getInfo, ssologin, getTokenFromService } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -40,18 +40,36 @@ const user = {
       })
     },
 
+    // 授权登录
+    Ssologin({ commit }) {
+      ssologin()
+    },
+
+    // 获取授权码
+    GetTokenFromService({ commit }, code) {
+      return new Promise((resolve, reject) => {
+        getTokenFromService(code).then(response => {
+          console.log(response)
+          setToken(response.access_token)
+          commit('SET_TOKEN', response.access_token)
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(response => {
-          const data = response.data
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', data.roles)
+          if (response.roles && response.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+            commit('SET_ROLES', response.roles)
           } else {
             reject('getInfo: roles must be a non-null array !')
           }
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
+          commit('SET_NAME', response.name)
+          commit('SET_AVATAR', response.avatar)
           resolve(response)
         }).catch(error => {
           reject(error)

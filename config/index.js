@@ -10,11 +10,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/uaa': {
-        target: 'http://localhost:7777',
+      '/auth': {
+        target: 'http://localhost:8080',
         changeOrigin: true,
         pathRewrite: {
-            '^/uaa': '/'
+            '^/auth': '/'
         }
       },
     },

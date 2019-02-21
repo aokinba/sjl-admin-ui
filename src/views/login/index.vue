@@ -29,7 +29,7 @@
         </el-button>
       </el-form-item>
       <el-form-item>
-        <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
+        <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="ssologin">
           授权登录
         </el-button>
       </el-form-item>
@@ -106,6 +106,9 @@ export default {
           return false
         }
       })
+    },
+    ssologin() {
+      this.$store.dispatch('Ssologin')
     }
   }
 }
