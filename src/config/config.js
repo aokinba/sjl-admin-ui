@@ -1,6 +1,6 @@
 var config = {
-  baseOAuthUrl: 'http://localhost:7777/',
-  userAuthorizationUri: 'http://localhost:7777/uaa/oauth/authorize', // 请求授权地址
+  baseOAuthUrl: 'http://192.168.56.1:8080/',
+  userAuthorizationUri: 'http://192.168.56.1:8080/uaa/oauth/authorize', // 请求授权地址
   accessTokenUri: '/auth/uaa/oauth/token', // accessToken请求地址
   userInfoUri: '/auth/client/userinfo', // 用户信息请求地址
   logoutUri: 'https://github.com/logout', // 登出请求地址
